@@ -1,8 +1,9 @@
 from django.test import TestCase
+from epsilon.projects.models import Pip
 
 # Create your tests here.
 
-class pipTest(TestCase):
+class pipViewTest(TestCase):
     def setUp(self):
         self.resp = self.client.get('/projetos/')
 
@@ -34,3 +35,32 @@ class pipTest(TestCase):
         'PIP form must have some fields'
         form = self.resp.context['form']
         self.assertItemsEqual(['title','orgUnit','client','justification','objectives','cost_estimates'], form.fields)
+
+
+class pipModelTest(self):
+    def setUp(self):
+        self.obj = Pip(
+            title = 'Epsilon',
+            orgUnit = 'EPSTI',
+            client = 'EPSTI',
+            justification = 'Necessidade de sistema automatizado para auxiliar no gerenciamento de portfolio do EPSTI',
+            objectives = 'Criar um sistema WEB para facilitar a gerencia de projetos e porfolios seguindo a metodologia adotada pelo EPSTI',
+            cost_estimates = 'diarias;suprimento_de_fundos;usts',
+            )
+
+    def test_create(self):
+        'PIP must have title, orgUnit, justification, objectives'
+        self.obj.save()
+        self.assertEqual(1, self.obj.id)
+
+    def test_unique_title(self):
+        'Pip title must be unique to avoid confusion within portfolio'
+        pip = Pip(
+            title = 'Epsilon',
+            orgUnit = 'GABSTI',
+            client = 'Servidores',
+            justification = 'Apenas mais um projeto com nome repedito',
+            objectives = 'Verificar se o sistema impede criacao do segundo PIP com mesmo titulo',
+            cost_estimates = '',
+            )
+        self.assertRaises(IntegrityError, pip.save)
