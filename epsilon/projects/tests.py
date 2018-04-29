@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.db import IntegrityError
+from epsilon.projects.forms import PipForm
 from epsilon.projects.models import Pip
 
 # Create your tests here.

@@ -1,0 +1,3 @@
+
+class PipForm(object):
+    pass
