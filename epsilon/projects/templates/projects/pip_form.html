@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <h1>Proposta Inicial de Projeto</h1>
+        <form action="." method="POST">
+            {% csrf_token %}
+            <p>
+                <label for="{{ form.title.id_for_title }}">{{ form.title.label }}:</label>
+                {{ form.title }}
+                {{ form.title.errors }}
+            </p>
+        </form>
+    </body>
+</html>
