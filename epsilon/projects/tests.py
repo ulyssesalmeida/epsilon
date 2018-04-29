@@ -7,10 +7,10 @@ from epsilon.projects.models import Pip
 
 class pipViewTest(TestCase):
     def setUp(self):
-        self.resp = self.client.get('/projetos/')
+        self.resp = self.client.get('/projetos/pip/')
 
     def test_get(self):
-        'GET /projetos/ must return status code 200'
+        'GET /projetos/pip must return status code 200'
         self.assertEqual(200, self.resp.status_code)
 
     def test_template(self):
