@@ -37,7 +37,7 @@ class pipViewTest(TestCase):
     def test_form_has_fields(self):
         'PIP form must have some fields'
         form = self.resp.context['form']
-        self.assertItemsEqual(['title','orgUnit','client','justification','objectives','cost_estimates'], form.fields)
+        self.assertListEqual(['title','orgUnit','client','justification','objectives','cost_estimates'], [x for x in form.fields])
 
 
 class pipModelTest(TestCase):
