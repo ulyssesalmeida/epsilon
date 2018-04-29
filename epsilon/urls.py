@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 
 from epsilon.core import views as core_views
+from epsilon.projects import views as projects_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('projetos/', projects_views.pip),
     path('', core_views.main),
 ]
