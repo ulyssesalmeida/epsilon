@@ -8,6 +8,32 @@
                 {{ form.title }}
                 {{ form.title.errors }}
             </p>
+            <p>
+                <label for="{{ form.orgUnit.id_for_title }}">{{ form.orgUnit.label }}:</label>
+                {{ form.orgUnit }}
+                {{ form.orgUnit.errors }}
+            </p>
+            <p>
+                <label for="{{ form.client.id_for_title }}">{{ form.client.label }}:</label>
+                {{ form.client }}
+                {{ form.client.errors }}
+            </p>
+            <p>
+                <label for="{{ form.justification.id_for_title }}">{{ form.justification.label }}:</label>
+                {{ form.justification }}
+                {{ form.justification.errors }}
+            </p>
+            <p>
+                <label for="{{ form.objectives.id_for_title }}">{{ form.objectives.label }}:</label>
+                {{ form.objectives }}
+                {{ form.objectives.errors }}
+            </p>
+            <p>
+                <label for="{{ form.cost_estimates.id_for_title }}">{{ form.cost_estimates.label }}:</label>
+                {{ form.cost_estimates }}
+                {{ form.cost_estimates.errors }}
+            </p>
+            <input type="submit" value="Enviar" class="button">
         </form>
     </body>
 </html>
