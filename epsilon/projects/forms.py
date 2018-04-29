@@ -1,9 +1,8 @@
 from django import forms
+from epsilon.projects.models import Pip
 
-class PipForm(forms.Form):
-    title = forms.CharField()
-    orgUnit = forms.CharField()
-    client = forms.CharField()
-    justification = forms.CharField(widget=forms.Textarea)
-    objectives = forms.CharField(widget=forms.Textarea)
-    cost_estimates = forms.CharField()
+
+class PipForm(forms.ModelForm):
+    class Meta:
+        model = Pip
+        exclude = ()
