@@ -20,8 +20,9 @@ class pipViewTest(TestCase):
     def test_html(self):
         'HTML must contain some input controls'
         self.assertContains(self.resp, '<form')
-        self.assertContains(self.resp, '<input',19)
-        self.assertContains(self.resp, 'type="test"',4)
+        self.assertContains(self.resp, '<input',6)
+        self.assertContains(self.resp, '<textarea',2)
+        self.assertContains(self.resp, 'type="text"',4)
         self.assertContains(self.resp, 'type="submit"')
 
     def test_csrf(self):
