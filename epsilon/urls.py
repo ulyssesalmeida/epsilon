@@ -21,6 +21,6 @@ from epsilon.projects import views as projects_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('projetos/pip/', projects_views.pip),
+    path('projetos/pip/', projects_views.PipView.as_view()),
     path('', core_views.main),
 ]
