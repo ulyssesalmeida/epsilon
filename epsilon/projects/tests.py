@@ -66,4 +66,5 @@ class pipModelTest(TestCase):
             objectives = 'Verificar se o sistema impede criacao do segundo PIP com mesmo titulo',
             cost_estimates = '',
             )
+        self.obj.save()
         self.assertRaises(IntegrityError, pip.save)
