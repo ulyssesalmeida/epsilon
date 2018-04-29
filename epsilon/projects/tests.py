@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.db import IntegrityError
 from epsilon.projects.models import Pip
 
 # Create your tests here.
@@ -37,7 +38,7 @@ class pipViewTest(TestCase):
         self.assertItemsEqual(['title','orgUnit','client','justification','objectives','cost_estimates'], form.fields)
 
 
-class pipModelTest(self):
+class pipModelTest(TestCase):
     def setUp(self):
         self.obj = Pip(
             title = 'Epsilon',
