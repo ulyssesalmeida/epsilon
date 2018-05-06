@@ -40,6 +40,25 @@ class pipViewTest(TestCase):
         form = self.resp.context['form']
         self.assertListEqual(['title','orgUnit','client','justification','objectives','cost_estimates'], [x for x in form.fields])
 
+class pipPostTest(TestCase):
+    def setUp(self):
+        data = dict(
+            title = 'Epsilon',
+            orgUnit = 'EPSTI',
+            client = 'EPSTI',
+            justification = 'Necessidade de sistema automatizado para auxiliar no gerenciamento de portfolio do EPSTI',
+            objectives = 'Criar um sistema WEB para facilitar a gerencia de projetos e porfolios seguindo a metodologia adotada pelo EPSTI',
+            cost_estimates = 'diarias;suprimento_de_fundos;usts',
+            )
+        self.resp = self.client.post('/projetos/pip/')
+
+    def test_post(self):
+        'Valid POST must redirect to /projetos/pip/P<year><id>/'
+        self.assertEqual(302, self.resp.status_code)
+
+    def test_save(self):
+        'PIP must exist after saving!'
+        self.assertTrue(Pip.objects.exists())
 
 class pipModelTest(TestCase):
     def setUp(self):
