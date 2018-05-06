@@ -3,7 +3,6 @@
     font-size: 4em;
     text-align: left;
     vertical-align: middle;
-    border-width: 3px;
     overflow: auto;
 }
 
@@ -13,4 +12,27 @@
     text-transform: lowercase;
     font-size: 1em;
     font-family: "Serif";
+}
+
+p {
+    overflow: auto;
+}
+
+input, textarea {
+    float: right;
+    width: 610px;
+}
+
+input.button {
+    width: auto;
+    float: none;
+}
+
+p label {
+    text-align: right;
+    vertical-align: top;
+}
+
+form {
+    max-width: 800px;
 }
