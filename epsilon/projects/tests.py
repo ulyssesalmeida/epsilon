@@ -50,7 +50,7 @@ class pipPostTest(TestCase):
             objectives = 'Criar um sistema WEB para facilitar a gerencia de projetos e porfolios seguindo a metodologia adotada pelo EPSTI',
             cost_estimates = 'diarias;suprimento_de_fundos;usts',
             )
-        self.resp = self.client.post('/projetos/pip/')
+        self.resp = self.client.post('/projetos/pip/', data)
 
     def test_post(self):
         'Valid POST must redirect to /projetos/pip/P<year><id>/'
@@ -59,6 +59,54 @@ class pipPostTest(TestCase):
     def test_save(self):
         'PIP must exist after saving!'
         self.assertTrue(Pip.objects.exists())
+
+class pipInvalidPostTesT(TestCase):
+    def setUp(self):
+        self.data = dict(
+            title = 'Epsilon',
+            orgUnit = 'EPSTI',
+            client = 'EPSTI',
+            justification = 'Necessidade de sistema automatizado para auxiliar no gerenciamento de portfolio do EPSTI',
+            objectives = 'Criar um sistema WEB para facilitar a gerencia de projetos e porfolios seguindo a metodologia adotada pelo EPSTI',
+            cost_estimates = 'diarias;suprimento_de_fundos;usts',
+            )
+
+    def test_blank_title(self):
+        'title can not be blank'
+        self.data['title'] = ''
+        self.resp = self.client.post('/projetos/pip/', self.data)
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_blank_orgUnit(self):
+        'orgUnit can not be blank'
+        self.data['orgUnit'] = ''
+        self.resp = self.client.post('/projetos/pip/', self.data)
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_blank_client(self):
+        'client can not be blank'
+        self.data['client'] = ''
+        self.resp = self.client.post('/projetos/pip/', self.data)
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_blank_justification(self):
+        'justification can not be blank'
+        self.data['justification'] = ''
+        self.resp = self.client.post('/projetos/pip/', self.data)
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_blank_objectives(self):
+        'objectives can not be blank'
+        self.data['objectives'] = ''
+        self.resp = self.client.post('/projetos/pip/', self.data)
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_blank_cost_estimates(self):
+        'cost_estimates _can_ be blank'
+        self.data['cost_estimates'] = ''
+        self.resp = self.client.post('/projetos/pip/', self.data)
+        self.assertEqual(302, self.resp.status_code)
+
 
 class pipModelTest(TestCase):
     def setUp(self):

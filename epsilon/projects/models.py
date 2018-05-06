@@ -6,14 +6,17 @@ from datetime import date
 class Pip(models.Model):
     class Meta:
         ordering = ['pipId']
-        
+
     pipId = models.CharField(_('Id'), max_length=8, unique=True)
     title = models.CharField(_('Título'), max_length=90, unique=True)
     orgUnit = models.CharField(_('Unidade Solicitante'), max_length=10)
     client = models.CharField(_('Cliente'), max_length=30)
     justification = models.TextField(_('Justificativa'))
     objectives = models.TextField(_('Objetivos'))
-    cost_estimates = models.CharField(_('Estimativa de Gastos'), max_length=60)
+    cost_estimates = models.CharField(_('Estimativa de Gastos'), max_length=60, blank=True)
+
+    def __str__(self):
+        return "{} - {}".format(self.pipId, self.title)
 
     def __get_next_pipId(self):
         q = Pip.objects.filter(pipId__startswith='P{}'.format(date.today().year))

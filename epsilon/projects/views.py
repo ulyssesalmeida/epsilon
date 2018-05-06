@@ -13,7 +13,9 @@ class PipView(View):
 
     def post(self, request):
         form = PipForm(request.POST)
-        form.is_valid()
-        obj = Pip(**form.cleaned_data)
-        obj.save()
-        return redirect('/projetos/pip/{})'.format(obj.pipId))
+        if not form.is_valid():
+            return render(request,
+                template_name = "projects/pip_form.html",
+                context = {'form':form})
+        obj = form.save()
+        return redirect('/projetos/pip/{}'.format(obj.pipId))
