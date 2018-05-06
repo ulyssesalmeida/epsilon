@@ -1,0 +1,16 @@
+
+#top {
+    font-size: 4em;
+    text-align: left;
+    vertical-align: middle;
+    border-width: 3px;
+    overflow: auto;
+}
+
+#logo {
+    position: relative;
+    float: left;
+    text-transform: lowercase;
+    font-size: 1em;
+    font-family: "Serif";
+}

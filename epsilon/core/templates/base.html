@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C/DTD HTML 4.01//EN">
+<html>
+<head>
+    {% load static %}
+    <title>Epsilon</title>
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet" media="screen" />
+</head>
+<body>
+    <div id="content">
+        <div id="top">
+            <div id="logo">(ε)</div> Epsilon
+        </div>
+        {% block main %}
+        {% endblock main %}
+        <div id="footer">
+            <p>&copy; 2018 - MIT LICENSE. <a href="http://www.djangoproject.com/" id="django-logo"><img src="https://www.djangoproject.com/m/img/badges/djangosite80x15.gif" border="0" alt="A Django site." title="A Django site." /></a></p>
+        </div>
+    </div>
+</body>
+</html>
