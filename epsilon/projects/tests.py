@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.db import IntegrityError
 from epsilon.projects.forms import PipForm
 from epsilon.projects.models import Pip
+from datetime import date
 
 # Create your tests here.
 
@@ -42,6 +43,7 @@ class pipViewTest(TestCase):
 
 class pipModelTest(TestCase):
     def setUp(self):
+        self.current_year = date.today().year
         self.obj = Pip(
             title = 'Epsilon',
             orgUnit = 'EPSTI',
@@ -56,6 +58,25 @@ class pipModelTest(TestCase):
         self.obj.save()
         self.assertEqual(1, self.obj.id)
 
+    def test_proposal_year_based_id(self):
+        'PIP must have one proposal id based on the current year'
+        self.obj.save()
+        self.assertEqual(self.obj.pipId, 'P{}{:03d}'.format(self.current_year,1))
+
+    def test_proposal_unique_id(self):
+        'PIP id must be unique and incremental'
+        pip = Pip(
+            title = 'Epsilon2',
+            orgUnit = 'GABSTI',
+            client = 'Servidores',
+            justification = 'Apenas mais um projeto com nome repedito',
+            objectives = 'Verificar se o sistema impede criacao do segundo PIP com mesmo titulo',
+            cost_estimates = '',
+            )
+        self.obj.save()
+        pip.save()
+        self.assertEqual(pip.pipId, 'P{}{:03d}'.format(self.current_year,2))
+
     def test_unique_title(self):
         'Pip title must be unique to avoid confusion within portfolio'
         pip = Pip(
@@ -68,3 +89,10 @@ class pipModelTest(TestCase):
             )
         self.obj.save()
         self.assertRaises(IntegrityError, pip.save)
+
+    def test_update_proposal(self):
+        'While changing PIP, pipId must remain the same'
+        self.obj.save()
+        self.obj.title = "Epsilon updated"
+        self.obj.save()
+        self.assertEqual(self.obj.pipId, 'P{}{:03d}'.format(self.current_year,1))
