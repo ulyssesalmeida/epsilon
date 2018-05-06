@@ -1,5 +1,5 @@
-<html>
-    <body>
+{% extends 'base.html' %}
+{% block main %}
         <h1>Proposta Inicial de Projeto</h1>
         <form action="." method="POST">
             {% csrf_token %}
@@ -35,5 +35,4 @@
             </p>
             <input type="submit" value="Enviar" class="button">
         </form>
-    </body>
-</html>
+{% endblock main %}
